@@ -1,1 +1,14 @@
 # Nifty-Stocks-Portfolio
+I created a portfoilio of 20 stocks based out of nifty50 stocks.Overall workflow of my project is as follows:
+
+Data Collection: Although i had various options for it like nse website , webscrapping, or through apis like alpha vantage. I came across inbuilt python library by yahoo finance so i opted for it. I collected historical data for those 50 stocks for a period of 6 months (8 feb 24 to 8 august24). After which i cleaned the missing values and made dataframe of it.Then i made a new column of daily returns in the dataframe.
+
+Correlation analysis: Based on the daily returns value for each stock i made a correlation matrix out of it and a heatmap for visualtion.These was an essential step so can we can understand the relation among various stocks which further helps in process of porfolio selection. Through correalation Analysis we can understand which are highly correlated stocks which increases the risk in the portfolio if kept together. Thus , an aim to diversefy was through selecting low and negative correlated stocks with most returns.These would help in hedging and keeping the risk little low.
+
+Clustering:I opted with a top down hierarchical clustering method. I wanted to use community based clustering like louvain algorithm but i didnt understood how to infer from it results.I stuided about hierarchical clustering in my coursework and tried both top down and bottom up approach, of which i found top down to be more conclusive. (I used chatgpt for code for all these methods.)I formed 10 clusters based on the distance matrix which is 1-corr matrix values. It was visible that stocks of same sectors were together as they should be due to high correlation with a few exceptions.
+
+Portfolio Selection: I calculated the overall 6 months return for each stocks and then sorted them in a descending order for each cluster and picked 2 stocks from each clusters with highest returns in them. These ensured hedging and diversification.Took a little help from gpt for the code.
+
+Another way of which i thought was calculating expoential moving average(that places a greater weight and significance on the most recent data points) ofP/E ratios of each stocks in daily form for 6 month timeperiod , but i couldnt get a conclusive data. After which i would have found indivdual average for each stocks and then a median P/E ratiio for each clusters based on the stocks in them and then selecting 2 with lowest values in each cluster. While researching i came across a variable used for analysis called as Beta, which is more like correalation of stocks with nifty value (Thats what i think it is) , but its formula was little tricky so i didnt go through with it.
+
+Benchmark: I computed 6 months returns of indexes like nifty50,nifty500 and sensex and compared my portfolio's stocks average. Portfolio's return came to be 19% whereas indexes had around 11%,14%,11% respectively.
